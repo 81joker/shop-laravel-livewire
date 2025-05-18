@@ -9,3 +9,5 @@
 3. install composer require livewire/livewire.
 
 4. install npm install alpinejs
+
+5. Install tailwindcss 
