@@ -6,4 +6,6 @@
     * composer
     * artisan jetstream:install livewire
 
-3. 
+3. install composer require livewire/livewire.
+
+4. install npm install alpinejs
