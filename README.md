@@ -11,3 +11,9 @@
 4. install npm install alpinejs
 
 5. Install tailwindcss 
+
+6. Install Models 
+    * Product model + migration + factory 
+    * ProductVariant model + migration + factory 
+    * Cart model + migration + factory 
+    * CartItem model + migration + factory 
