@@ -18,7 +18,6 @@ class ImageFactory extends Factory
     {
         return [
           'path' => fake()->unique($reset = true)->randomElement(['media/1.jpg', 'media/2.jpg', 'media/3.jpg', 'media/4.jpg', 'media/5.jpg']),
-            // 'path' => fake()->imageUrl(),
         ];
     }
 }

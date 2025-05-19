@@ -19,7 +19,7 @@ class ProductFactory extends Factory
         return [
             'name' => fake()->unique()->randomElement(['Tishirt', 'Laravel Cup', 'Blue Shirt', 'Shoes', 'Pants']),
             'description' => fake()->text('100'),
-            'price' => fake()->numberBetween(1, 100),
+            'price' => fake()->numberBetween(1000, 2000),
             'main_image_id' => fake()->numberBetween(1, 10),
 
         ];

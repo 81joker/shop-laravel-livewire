@@ -11,7 +11,9 @@
         "laravel/jetstream": "^5.3",
         "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.10.1",
-        "livewire/livewire": "^3.6"
+        "livewire/livewire": "^3.6",
+        "moneyphp/iso-currencies": "^3.5",
+        "moneyphp/money": "^4.7"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
