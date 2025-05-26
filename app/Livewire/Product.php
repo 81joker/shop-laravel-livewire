@@ -19,7 +19,9 @@ class Product extends Component
 
     public function mount()
     {
-        $this->variant = $this->product->variants->value('id');
+        if ($this->product->variants->value('id')) {
+          $this->variant = $this->product->variants->value('id');
+        }
         // $this->variant = $this->product->variants->first->id;
     }
 
@@ -30,8 +32,7 @@ class Product extends Component
          );
 
         $this->banner('Your Product has been added to cart');
-
-        // return $this->emit('addToCart', $this->productId, $this->variant);
+        $this->dispatch('productAddedToCart');
     }
 
     public function getProductProperty()

@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('product_variants', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('product_id');
+            $table->unsignedBigInteger('product_id');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->string('color')->nullable();
             $table->string('size')->nullable();
             // $table->unsignedInteger('stock');
