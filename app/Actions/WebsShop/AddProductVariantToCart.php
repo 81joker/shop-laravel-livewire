@@ -3,7 +3,6 @@
 namespace App\Actions\WebsShop;
 
 use App\Factories\CartFactory;
-use App\Models\Cart;
 
 
 class AddProductVariantToCart {
@@ -11,14 +10,26 @@ class AddProductVariantToCart {
     public function add($variantId){
 
 
-         // to do the third setup
-        CartFactory::make()->items()->create([
+
+        // This is the fourth setup of the cart [ We added the auto Incrementing of the quantity ]
+        CartFactory::make()->items()->firstOrCreate([
             'product_variant_id' => $variantId,
-            'quantity' => 1,
-        ]);
+        ],
+        [
+            'quantity' => 0,
+        ])->increment('quantity');
 
 
-        // to do the second setup
+         //  This is the third setup
+
+        // CartFactory::make()->items()->create([
+        //     'product_variant_id' => $variantId,
+        //     'quantity' => 1,
+        // ]);
+
+
+        //  This is the second setup
+
         // $cart = match(auth()->guest()) {
         //     true => Cart::firstOrCreate([
         //     'session_id' => session()->getId(),
@@ -32,9 +43,8 @@ class AddProductVariantToCart {
         // ]);
 
 
-       
+        //  This is the first setup of the cart
 
-        // To Test the first setup of the cart
         // if (auth()->guest()) {
         //     $cart = Cart::firstOrCreate([
         //         'session_id' => session()->getId(),
