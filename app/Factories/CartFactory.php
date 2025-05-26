@@ -1,29 +1,30 @@
-<?php
+<?php 
 
 namespace App\Factories;
 
 use App\Models\Cart;
-use Illuminate\Support\Facades\Auth;
 
-class CartFactory
+
+class CartFactory 
 {
-    public static function make(): Cart
-    {
-        return match (Auth::guest()) {
-            true => self::getOrCreateSessionCart(),
-            false => self::getOrCreateUserCart(),
-        };
-    }
+    // public static function make(): Cart{
+    //     $cart = match(auth()->guest()) {
+    //         true => Cart::firstOrCreate([
+    //         'session_id' => session()->getId(),
+    //         ]),
+    //         false => auth()->user()->cart()->first() ?: auth()->user()->cart()->create(),
+    //     };
+    //     return $cart;
 
-    protected static function getOrCreateSessionCart(): Cart
+    // }
+        public static function make(): Cart
     {
-        return Cart::firstOrCreate([
-            'session_id' => session()->getId()
-        ]);
-    }
+        if (auth()->guest()) {
+            return Cart::firstOrCreate([
+                'session_id' => session()->getId(),
+            ]);
+        }
 
-    protected static function getOrCreateUserCart(): Cart
-    {
-        return Auth::user()->cart()->firstOrCreate();
+        return auth()->user()->cart()->firstOrCreate();
     }
 }

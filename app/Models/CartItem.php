@@ -4,6 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
+use App\Models\Product;
+use App\Models\ProductVariant;
 
 class CartItem extends Model
 {
@@ -15,4 +19,31 @@ class CartItem extends Model
         'product_variant_id',
         'quantity',
     ];
+
+    
+    // public function cart()
+    // {
+    //     return $this->belongsTo(Cart::class);
+    // }
+
+    public function product(): HasOneThrough
+    {
+        return $this->hasOneThrough(
+                Product::class,
+                ProductVariant::class,
+                'id', // Foreign key on product_variants table...
+                'id', // Foreign key on products table...
+                'product_variant_id', // Local key on cart_items table...
+                'product_id' // Local key on product_variants table...
+            );
+    }
+
+    public function variant():BelongsTo
+    {
+        return $this->belongsTo(ProductVariant::class, 'product_variant_id', 'id');
+    }
+    // public function getTotalPriceAttribute()
+    // {
+    //     return $this->quantity * $this->productVariant->price;
+    // }
 }

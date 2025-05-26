@@ -17,6 +17,13 @@ return new class extends Migration
             $table->text('description');
             $table->unsignedInteger('price');
             $table->unsignedInteger('main_image_id')->nullable();
+
+            // $table->unsignedBigInteger('main_image_id')->nullable();
+            // $table->foreign('main_image_id')->references('id')->on('images')->nullOnDelete();
+            //  $table->foreignId('main_image_id')->nullable()->constrained('images')->onDelete('cascade')->nullable();
+
+
+
             $table->timestamps();
         });
     }

@@ -9,9 +9,11 @@ use Livewire\Attributes\On;
 class NavigationCart extends Component
 {
     #[On('productAddedToCart')]
+    #[On('productRemovedFromCart')]
     public function refreshCart()
     {
         $this->dispatch('productAddedToCart');
+        $this->dispatch('productRemovedFromCart');
     }
 
     /**
