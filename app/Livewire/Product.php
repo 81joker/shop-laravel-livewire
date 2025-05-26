@@ -3,11 +3,13 @@
 namespace App\Livewire;
 
 use App\Models\Product as ModelsProduct;
+use Laravel\Jetstream\InteractsWithBanner;
 use Livewire\Component;
 use App\Actions\WebsShop\AddProductVariantToCart;
 
 class Product extends Component
 {
+    use InteractsWithBanner;
     public $productId;
     public $variant;
 
@@ -23,7 +25,12 @@ class Product extends Component
 
     public function addToCart(AddProductVariantToCart $cart){
          $this->validate();
-         $cart->add();
+         $cart->add(
+            variantId: $this->variant
+         );
+
+        $this->banner('Your Product has been added to cart');
+
         // return $this->emit('addToCart', $this->productId, $this->variant);
     }
 
@@ -39,3 +46,12 @@ class Product extends Component
         return view('livewire.product')->layout('layouts.app');;
     }
 }
+
+
+// $this->banner('الرسالة') - رسالة عادية
+
+// $this->dangerBanner('الرسالة') - رسالة خطأ (حمراء)
+
+// $this->successBanner('الرسالة') - رسالة نجاح (خضراء)
+
+// $this->warningBanner('الرسالة') - رسالة تحذير (صفراء)
