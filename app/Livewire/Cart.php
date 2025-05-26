@@ -19,7 +19,25 @@ class Cart extends Component
         $this->dispatch('productRemovedFromCart');
         // $this->dispatch('productRemovedFromCart', ['itemId' => $itemId]);
     }
-    
+
+    public function increment($itemId)
+    {
+        CartFactory::make()->items()->find($itemId)->increment('quantity');
+        // CartFactory::make()->items()->where('id', $itemId)->increment('quantity');
+        $this->dispatch('productQuantityUpdated');
+    }
+    public function decrement($itemId)
+    {
+        $item = CartFactory::make()->items()->find($itemId);
+
+        if ($item && $item->quantity > 1) {
+            $item->decrement('quantity');
+            // $this->dispatch('productQuantityUpdated');
+        }
+        // elseif ($item) {
+        //     $this->delete($itemId);
+        // }
+    }
 
     public function render()
     {
