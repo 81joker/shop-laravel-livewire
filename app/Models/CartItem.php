@@ -30,7 +30,7 @@ class CartItem extends Model
         );
     }
 
-    
+
 
     public function product(): HasOneThrough
     {

@@ -56,12 +56,14 @@
                 <tfoot>
                     <tr>
                        <td colspan="5" class="text-right font-medium">Total:</td>
-                        <td colspan="2" class="font-medium">{{ $this->cart->total }}</td>
+                        {{-- <td colspan="2" class="font-medium">{{ $this->cart->total }}</td> --}}
+                        <td colspan="2" class="font-medium">${{ number_format($this->cart->total->getAmount() / 100, 2) }}</td>
                     </tr>
                 </tfoot>
             </table>
         </div>
-        <div class="bg-white rounded-lg shadow-md p-5 col-span-1">
+        <div>
+            <div class="bg-white rounded-lg shadow-md p-5 col-span-1">
             <h4 class="text-lg font-semibold mb-4">Cart Summary</h4>
             @guest
                 <p>Please <a href="/register" class="underline">Register</a> or <a href="/login"
@@ -71,5 +73,6 @@
             @auth
                 <x-button wire:click="addToCart">Add to cart</x-button>
             @endauth
+        </div>
         </div>
     </div>
