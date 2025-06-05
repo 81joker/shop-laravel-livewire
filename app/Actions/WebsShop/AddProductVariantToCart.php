@@ -7,17 +7,18 @@ use App\Factories\CartFactory;
 
 class AddProductVariantToCart {
 
-    public function add($variantId){
+    public function add($variantId , $quantity = 1, $cart = null) {
 
 
 
         // This is the fourth setup of the cart [ We added the auto Incrementing of the quantity ]
-        CartFactory::make()->items()->firstOrCreate([
+        $cart?:CartFactory::make()->items()->firstOrCreate([
+        // CartFactory::make()->items()->firstOrCreate([
             'product_variant_id' => $variantId,
         ],
         [
             'quantity' => 0,
-        ])->increment('quantity');
+        ])->increment('quantity', $quantity);
 
 
          //  This is the third setup
