@@ -3,7 +3,7 @@
 # StripMarkDown
 
 1- stripo login command [link](https://github.com/stripo/stripo-cli)
-
+    After the install the give me 30 days free trial.
 A- Download Stripe CLI manually  
 ```bash
 wget https://github.com/stripe/stripe-cli/releases/latest/download/stripe_1.27.0_linux_x86_64.tar.gz
@@ -30,3 +30,42 @@ stripe login
 ```
 
 
+2- Install Laravel Cashier (Stripe) [link](https://laravel.com/docs/12.x/billing)
+
+A- First, install the Cashier package for Stripe   
+```bash
+sail composer require laravel/cashier
+```
+B- Then, migrate your database:  
+```bash
+sail artisan migrate
+```
+C- Configuration Billable Models 
+```bash
+use Laravel\Cashier\Billable;
+
+class User extends Authenticatable
+{
+    use Billable;
+}
+```
+
+D- Configuration and Define Stripe Keys 
+```bash
+STRIPE_KEY=your-stripe-key
+STRIPE_SECRET=your-stripe-secret
+STRIPE_WEBHOOK_SECRET=your-stripe-webhook-secret
+```
+
+E- I can also change the default  Currency Configuration 
+```bash
+CASHIER_CURRENCY=eur
+```
+
+F- I install Stripe Webhooks 
+ wha are Stripe webhooks? Stripe webhooks are essential for keeping your Laravel application in sync with Stripe's events, allowing for automated updates and real-time interactions with your users. They enhance the functionality of your billing system by ensuring that all changes are accurately reflected in your application.
+ 
+```bash
+stripe listen --forward-to=http://localhost/stripe/webhooks --format=json
+```
+Then copy the secret key from Stripe and add it to the .env file.
