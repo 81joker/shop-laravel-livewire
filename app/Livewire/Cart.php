@@ -2,33 +2,20 @@
 
 namespace App\Livewire;
 
+use App\Actions\WebsShop\CreateStripeCheckoutSession;
 use Livewire\Component;
 use App\Factories\CartFactory;
 
 class Cart extends Component
 {
 
-    public function checkout()
+    public function checkout(CreateStripeCheckoutSession $checkoutSession)
     {
         // https://laravel.com/docs/12.x/billing#checkout
-        return auth()->user()->checkout([
-                [
-                    'price_data' => [
-                        'currency' => 'USD',
-                        'unit_amount' => 100, // amount in cents ($1.00)
-                        'product_data' => [
-                            'name' => 'My Product',
-                            'metadata' => [
-                                'product_id' => '1',
-                                'variant_id' => '1',
-                            ],
-                        ],
-                        
-                    ],
-                    'quantity' => 2
-            ]
-        ]);
+        return $checkoutSession->createFromCart($this->cart);
+        // return auth()->user()->checkout();
     }
+
 
 
     public function getCartProperty()
@@ -41,7 +28,11 @@ class Cart extends Component
         // return CartFactory::make();
     }
 
-
+    public function getAmount()
+    {
+        // return CartFactory::make()->amount;
+        return $this->cart->amount;
+    }
     public function getItemsProperty()
     {
         return $this->cart->items;
