@@ -71,7 +71,7 @@
             @endguest
 
             @auth
-                <x-button wire:click="addToCart">Add to cart</x-button>
+                <x-button wire:click="checkout">Checkout</x-button>
             @endauth
         </div>
         </div>

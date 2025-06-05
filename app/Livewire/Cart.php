@@ -8,6 +8,28 @@ use App\Factories\CartFactory;
 class Cart extends Component
 {
 
+    public function checkout()
+    {
+        // https://laravel.com/docs/12.x/billing#checkout
+        return auth()->user()->checkout([
+                [
+                    'price_data' => [
+                        'currency' => 'USD',
+                        'unit_amount' => 100, // amount in cents ($1.00)
+                        'product_data' => [
+                            'name' => 'My Product',
+                            'metadata' => [
+                                'product_id' => '1',
+                                'variant_id' => '1',
+                            ],
+                        ],
+                        
+                    ],
+                    'quantity' => 2
+            ]
+        ]);
+    }
+
 
     public function getCartProperty()
     {

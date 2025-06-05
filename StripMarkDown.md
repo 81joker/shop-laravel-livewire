@@ -69,3 +69,14 @@ F- I install Stripe Webhooks
 stripe listen --forward-to=http://localhost/stripe/webhooks --format=json
 ```
 Then copy the secret key from Stripe and add it to the .env file.
+
+3- Create a Stripe Checkout Session  [link](https://docs.stripe.com/api/checkout/sessions/create)
+[Laracast Explain ](https://laracasts.com/series/build-a-web-shop-from-a-z/episodes/22)
+```bash
+stripe checkout sessions create \
+  --payment-method-types card \
+  --mode payment \
+  --success-url http://localhost/stripe/success \
+  --cancel-url http://localhost/stripe/cancel \
+  --line-items mode=payment \
+  --line-items price=price_1Nc2m2DZ8Mkfnho2BsiwbOyr \
