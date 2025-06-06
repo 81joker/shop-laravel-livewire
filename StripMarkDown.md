@@ -80,3 +80,11 @@ stripe checkout sessions create \
   --cancel-url http://localhost/stripe/cancel \
   --line-items mode=payment \
   --line-items price=price_1Nc2m2DZ8Mkfnho2BsiwbOyr \
+```
+
+4- completed our checkout, we can move on to dealing with webhooks sent by Stripe.
+```bash
+php artisan make:listener StripeEventListener
+```
+
+
