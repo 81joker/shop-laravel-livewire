@@ -9,9 +9,37 @@ use App\Factories\CartFactory;
 class Cart extends Component
 {
 
+    // public function checkout()
+    // {
+    //     return auth()->user()->checkout([
+    //         [
+    //         'price_data'=> [
+    //             'currency' => 'EUR',
+    //              'unit_amount' => 100,
+
+    //             'product_data' => [
+    //                 'name' => ,
+    //                 'description' => 'Cart description',
+    //                 'images' => [
+    //                     'https://picsum.photos/200/300'
+    //                 ],
+    //                 'metadata' => [
+    //                     'product_id' => 1,
+    //                     'product_variant_id' => 1
+    //                 ]
+
+    //             ]
+    //         ],
+    //         'quantity' => 1
+
+    //         ]
+    //     ]);
+    // }
+
     public function checkout(CreateStripeCheckoutSession $checkoutSession)
     {
         // https://laravel.com/docs/12.x/billing#checkout
+        // https://docs.stripe.com/api/checkout/sessions/create#create_checkout_session-line_items-adjustable_quantity
         return $checkoutSession->createFromCart($this->cart);
         // return auth()->user()->checkout();
     }
